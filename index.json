@@ -1,0 +1,18 @@
+{
+  "packs": [
+    {
+      "id": "de-brandenburg",
+      "name": "Brandenburg & Berlin",
+      "bbox": [
+        11.26,
+        51.36,
+        14.77,
+        53.56
+      ],
+      "sizeBytes": 370421760,
+      "hasElevation": false,
+      "builtAt": "2026-09-17T16:01:50.931355Z",
+      "downloadURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-brandenburg.tar"
+    }
+  ]
+}
