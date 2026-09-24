@@ -12,7 +12,10 @@
       "sizeBytes": 370421760,
       "hasElevation": false,
       "builtAt": "2026-09-17T16:01:50.931355Z",
-      "downloadURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-brandenburg.tar"
+      "downloadURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-brandenburg.tar",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-brandenburg.tar.gz",
+      "archiveBytes": 126037998,
+      "archiveSHA256": "f176c0f44275e3c4744f13a69a66247e063bf4234152358a83df43bcca774c68"
     }
   ]
 }
