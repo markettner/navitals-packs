@@ -1,0 +1,104 @@
+# Quarterly rebuild of the cycle and hiking route overlay for Europe, on the 1st of Jan/Apr/Jul/Oct.
+# Each country is filtered to its route relations on its own runner (Europe whole is 35 GB, more
+# than a runner's disk); one job then merges them and builds the tiles in a single pass, since a
+# EuroVelo superroute spans a dozen countries and only carries its name where one pass sees all of
+# it. The result is a new release `overlays-<date>`, and index.json points the app at it.
+#
+# Scripts come from the private app repo with NAVITALS_PIPELINE_TOKEN (see monthly.yml).
+name: Quarterly route overlays
+
+on:
+  schedule:
+    - cron: "0 3 1 1,4,7,10 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  countries:
+    runs-on: ubuntu-24.04
+    outputs:
+      list: ${{ steps.list.outputs.list }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - id: list
+        run: echo "list=$(python3 navitals/tools/overlays/europe_countries.py)" >> "$GITHUB_OUTPUT"
+
+  filter:
+    needs: countries
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        country: ${{ fromJSON(needs.countries.outputs.list) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq zsh osmium-tool
+      - name: Filter ${{ matrix.country.id }}
+        run: |
+          curl -fsSL --retry 3 -o extract.osm.pbf "${{ matrix.country.url }}"
+          zsh navitals/tools/overlays/filter_routes.sh extract.osm.pbf "${{ matrix.country.id }}-routes.osm.pbf"
+          rm extract.osm.pbf
+          ls -la "${{ matrix.country.id }}-routes.osm.pbf"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: routes-${{ matrix.country.id }}
+          path: ${{ matrix.country.id }}-routes.osm.pbf
+          retention-days: 3
+
+  build:
+    needs: filter
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    concurrency: navitals-index
+    steps:
+      - name: Make room
+        # The tiles need more than the runner's free disk; its preinstalled toolchains are not used.
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+      - uses: actions/checkout@v4
+        with:
+          path: packs-repo
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - name: Install osmium, pyosmium and tippecanoe
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq zsh osmium-tool build-essential libsqlite3-dev zlib1g-dev
+          python3 -m venv navitals/tools/overlays/.work/venv
+          navitals/tools/overlays/.work/venv/bin/pip install -q "osmium==4.3.*"
+          git clone -q --depth 1 --branch 2.79.0 https://github.com/felt/tippecanoe.git /tmp/tippecanoe
+          make -C /tmp/tippecanoe -j"$(nproc)" >/dev/null
+          sudo make -C /tmp/tippecanoe install >/dev/null
+      - name: Check the naming rules
+        run: navitals/tools/overlays/.work/venv/bin/python -m doctest navitals/tools/overlays/build_route_overlay.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: routes-*
+          path: routes
+          merge-multiple: true
+      - name: Build the overlay
+        run: zsh navitals/tools/overlays/build_overlay.sh europe routes/*-routes.osm.pbf
+      - name: Publish it and point the app at it
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git -C packs-repo config user.name "github-actions[bot]"
+          git -C packs-repo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 navitals/tools/overlays/publish_overlay.py --index-checkout packs-repo \
+            navitals/tools/overlays/.work/out/europe.pmtiles

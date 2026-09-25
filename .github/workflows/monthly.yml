@@ -1,0 +1,126 @@
+# Monthly refresh of the offline routing data, on the 1st:
+#   1. copy BRouter's tiles from brouter.de to navitals-brouter (only the ones rebuilt since),
+#   2. rebuild every region's Valhalla pack from current OpenStreetMap extracts,
+#   3. replace the packs in place on the `packs` release and rewrite index.json.
+# Both halves come from OSM data days apart, which keeps matching a BRouter line onto Valhalla's
+# graph from tripping over ways that exist in only one of them.
+#
+# The build scripts live in the private app repo (tools/), checked out with NAVITALS_PIPELINE_TOKEN:
+# a fine-grained token with Contents read on markettner/Navitals and Contents write on
+# markettner/navitals-brouter. Everything written here uses this repo's own GITHUB_TOKEN.
+name: Monthly routing data
+
+on:
+  schedule:
+    - cron: "0 2 1 * *"
+  workflow_dispatch:
+    inputs:
+      regions:
+        description: "Region ids to rebuild, space-separated (empty: all of regions.tsv)"
+        required: false
+        default: ""
+      mirror:
+        description: "Copy BRouter tiles from brouter.de first"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    if: github.event_name == 'schedule' || inputs.mirror
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - name: Mirror BRouter tiles
+        env:
+          GH_TOKEN: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+        run: python3 navitals/tools/brouter/mirror_tiles.py
+
+  regions:
+    runs-on: ubuntu-24.04
+    outputs:
+      ids: ${{ steps.list.outputs.ids }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - id: list
+        env:
+          WANTED: ${{ inputs.regions }}
+        run: |
+          ids=$(grep -v '^#' navitals/tools/packs/regions.tsv | cut -f1 | grep -v '^$')
+          if [ -n "$WANTED" ]; then ids=$(printf '%s\n' $WANTED); fi
+          echo "ids=$(printf '%s\n' $ids | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: regions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        id: ${{ fromJSON(needs.regions.outputs.ids) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - name: Install Valhalla's tile builders
+        # 3.7.x only: valhalla-mobile 0.6.3 in the app reads 3.6.3 tiles, and 3.8 changed the header.
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq zsh
+          python3 -m venv navitals/tools/packs/.work/venv
+          navitals/tools/packs/.work/venv/bin/pip install -q "pyvalhalla==3.7.*"
+      - name: Build ${{ matrix.id }}
+        run: zsh navitals/tools/packs/build_regions.sh ${{ matrix.id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pack-${{ matrix.id }}
+          path: |
+            navitals/tools/packs/.work/out/${{ matrix.id }}/valhalla_tiles.tar.gz
+            navitals/tools/packs/.work/out/${{ matrix.id }}/pack.json
+          retention-days: 3
+
+  publish:
+    # Every region, and the mirror, or nothing: a half-published month would leave the index
+    # measuring BRouter cells against tiles it did not build with.
+    needs: [mirror, build]
+    if: ${{ !cancelled() && needs.build.result == 'success' && needs.mirror.result != 'failure' }}
+    runs-on: ubuntu-24.04
+    concurrency: navitals-index
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: packs-repo
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pack-*
+          path: out
+      - name: Publish packs and index
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git -C packs-repo config user.name "github-actions[bot]"
+          git -C packs-repo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for d in out/pack-*; do mv "$d" "out/${d#out/pack-}"; done
+          python3 navitals/tools/packs/publish_packs.py --index-checkout packs-repo out/*/
