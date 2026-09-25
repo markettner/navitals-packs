@@ -68,6 +68,12 @@ jobs:
       - name: Make room
         # The tiles need more than the runner's free disk; its preinstalled toolchains are not used.
         run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+      - name: Add swap
+        # The build pass peaks at about 11.5 GB for Europe (measured 2026-09-25); the runner has 16.
+        # Swap is the margin for OSM growing, so a slow build is the failure mode, not a killed one.
+        run: |
+          sudo fallocate -l 8G /swapfile2 && sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2 >/dev/null && sudo swapon /swapfile2 && free -h
       - uses: actions/checkout@v4
         with:
           path: packs-repo
