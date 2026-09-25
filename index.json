@@ -162,12 +162,12 @@
         7.41,
         49.64
       ],
-      "sizeBytes": 46530560,
+      "sizeBytes": 46540800,
       "hasElevation": false,
-      "builtAt": "2026-09-25T00:02:34.116731Z",
+      "builtAt": "2026-09-25T15:13:06.891947Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-saarland.tar.gz",
-      "archiveBytes": 17453767,
-      "archiveSHA256": "5a2c615ad564808d0c694118c45cbfac31c917c3cc7f0f7ba1b48cd178d0da1f",
+      "archiveBytes": 17458632,
+      "archiveSHA256": "8edcf8f934c4e0faec0b28b1e983310fba37a06a567812c5dea08db64f54ae94",
       "brouterBytes": 7528130
     },
     {
