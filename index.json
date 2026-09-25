@@ -12,14 +12,14 @@
       "sizeBytes": 808570880,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:13:52.704883Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/at.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/at.tar.gz",
       "archiveBytes": 311913859,
       "archiveSHA256": "81548b93ca0085e089542aaed741d4039ec3d22d7fe69ab3d2c7e592532352ec",
       "brouterBytes": 181779279
     },
     {
       "id": "de-baden-wuerttemberg",
-      "name": "Baden-W\u00fcrttemberg",
+      "name": "Baden-Württemberg",
       "bbox": [
         7.51,
         47.53,
@@ -29,7 +29,7 @@
       "sizeBytes": 718223360,
       "hasElevation": false,
       "builtAt": "2026-09-24T23:34:56.994677Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-baden-wuerttemberg.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-baden-wuerttemberg.tar.gz",
       "archiveBytes": 265198968,
       "archiveSHA256": "ec3c824b31b00083a030fba0e58a0038f92bd180c8f75a68338c2ea0ca521ae1",
       "brouterBytes": 90405914
@@ -46,7 +46,7 @@
       "sizeBytes": 1001195520,
       "hasElevation": false,
       "builtAt": "2026-09-24T23:41:58.649639Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-bayern.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-bayern.tar.gz",
       "archiveBytes": 366518000,
       "archiveSHA256": "85fcbce1f59cb159943c3df1fa22549fec2fad7932fb4b009a237a90ce6616fa",
       "brouterBytes": 158881831
@@ -63,7 +63,7 @@
       "sizeBytes": 370421760,
       "hasElevation": false,
       "builtAt": "2026-09-17T16:01:50.931355Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-brandenburg.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-brandenburg.tar.gz",
       "archiveBytes": 126037998,
       "archiveSHA256": "f176c0f44275e3c4744f13a69a66247e063bf4234152358a83df43bcca774c68",
       "brouterBytes": 42703805
@@ -80,7 +80,7 @@
       "sizeBytes": 357007360,
       "hasElevation": false,
       "builtAt": "2026-09-24T23:44:17.230614Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-hessen.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-hessen.tar.gz",
       "archiveBytes": 132940171,
       "archiveSHA256": "88b5daf3810d21e663ac5a4e6c32e039f2919c2327c9269ba85d0fb09083d0d2",
       "brouterBytes": 65447596
@@ -97,7 +97,7 @@
       "sizeBytes": 584488960,
       "hasElevation": false,
       "builtAt": "2026-09-24T23:48:56.477067Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-niedersachsen.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-niedersachsen.tar.gz",
       "archiveBytes": 201129368,
       "archiveSHA256": "49b972ffbbcfa9906178b4ccdd276b8009a45b2994e64f631c04ddcbf12002ad",
       "brouterBytes": 109904402
@@ -114,7 +114,7 @@
       "sizeBytes": 120524800,
       "hasElevation": false,
       "builtAt": "2026-09-24T23:45:07.821481Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-mecklenburg-vorpommern.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-mecklenburg-vorpommern.tar.gz",
       "archiveBytes": 43587746,
       "archiveSHA256": "ae03255ce482a688f172b246e11c9599be98a7f6c7eae9ea766215a5556de90f",
       "brouterBytes": 15239616
@@ -131,7 +131,7 @@
       "sizeBytes": 834918400,
       "hasElevation": false,
       "builtAt": "2026-09-24T23:54:22.182742Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-nordrhein-westfalen.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-nordrhein-westfalen.tar.gz",
       "archiveBytes": 300023270,
       "archiveSHA256": "08c9be142f9aea2dba725392fed33ce49c8dee25bb10272057ef4724d1b6265b",
       "brouterBytes": 101511869
@@ -148,7 +148,7 @@
       "sizeBytes": 281344000,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:02:07.860968Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-rheinland-pfalz.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-rheinland-pfalz.tar.gz",
       "archiveBytes": 107286290,
       "archiveSHA256": "f9122f42617986c7ea0d5f9bd57fcc4bad07a04bea51ee3525089b6ab7093d84",
       "brouterBytes": 60977945
@@ -165,7 +165,7 @@
       "sizeBytes": 46530560,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:02:34.116731Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-saarland.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-saarland.tar.gz",
       "archiveBytes": 17453767,
       "archiveSHA256": "5a2c615ad564808d0c694118c45cbfac31c917c3cc7f0f7ba1b48cd178d0da1f",
       "brouterBytes": 7528130
@@ -182,7 +182,7 @@
       "sizeBytes": 291573760,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:04:55.237543Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-sachsen.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-sachsen.tar.gz",
       "archiveBytes": 105701382,
       "archiveSHA256": "40142fa603a596464c40d0236f497583a56e6b2632e679897082f10370bf009b",
       "brouterBytes": 40828201
@@ -199,7 +199,7 @@
       "sizeBytes": 157562880,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:06:01.055330Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-sachsen-anhalt.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-sachsen-anhalt.tar.gz",
       "archiveBytes": 58767483,
       "archiveSHA256": "5eeb35ec67244aa36a060cec9c3e4c383a0fda11c5422e5c498522703ce6ffa2",
       "brouterBytes": 33950923
@@ -216,7 +216,7 @@
       "sizeBytes": 237824000,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:07:42.641802Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-schleswig-holstein.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-schleswig-holstein.tar.gz",
       "archiveBytes": 82593581,
       "archiveSHA256": "e723834974b01ee4eb8ede17148e706b5f3f537f72438e97c6b96ad7b7d4de75",
       "brouterBytes": 25806752
@@ -233,7 +233,7 @@
       "sizeBytes": 632238080,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:17:38.205266Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/ch.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/ch.tar.gz",
       "archiveBytes": 238644456,
       "archiveSHA256": "1a2539159369c07f231d50a1b829d4b84dfec3bc9ed8555f9aba111315cdf24f",
       "brouterBytes": 108750427
@@ -250,7 +250,7 @@
       "sizeBytes": 166840320,
       "hasElevation": false,
       "builtAt": "2026-09-25T00:09:04.911912Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs-2026-09/de-thueringen.tar.gz",
+      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-thueringen.tar.gz",
       "archiveBytes": 62979199,
       "archiveSHA256": "34b713b71898e5949e487f16214759c725dd7a666384b4c49d22a708a117145c",
       "brouterBytes": 35901437
