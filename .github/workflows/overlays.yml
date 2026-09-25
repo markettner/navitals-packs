@@ -4,7 +4,7 @@
 # EuroVelo superroute spans a dozen countries and only carries its name where one pass sees all of
 # it. The result is a new release `overlays-<date>`, and index.json points the app at it.
 #
-# Scripts come from the private app repo with NAVITALS_PIPELINE_TOKEN (see monthly.yml).
+# Scripts come from the private app repo with NAVITALS_TOOLS_TOKEN (see monthly.yml).
 name: Quarterly route overlays
 
 on:
@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: markettner/Navitals
-          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
       - id: list
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: markettner/Navitals
-          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq zsh osmium-tool
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: markettner/Navitals
-          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
       - name: Install osmium, pyosmium and tippecanoe

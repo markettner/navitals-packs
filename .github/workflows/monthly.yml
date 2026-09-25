@@ -5,9 +5,11 @@
 # Both halves come from OSM data days apart, which keeps matching a BRouter line onto Valhalla's
 # graph from tripping over ways that exist in only one of them.
 #
-# The build scripts live in the private app repo (tools/), checked out with NAVITALS_PIPELINE_TOKEN:
-# a fine-grained token with Contents read on markettner/Navitals and Contents write on
-# markettner/navitals-brouter. Everything written here uses this repo's own GITHUB_TOKEN.
+# The build scripts live in the private app repo (tools/), checked out with NAVITALS_TOOLS_TOKEN
+# (fine-grained, Contents read on markettner/Navitals only). The mirror writes to navitals-brouter
+# with NAVITALS_BROUTER_TOKEN (Contents write on that repo only): a fine-grained token grants the
+# same access to every repo it covers, so read and write are two tokens. Everything written here
+# uses this repo's own GITHUB_TOKEN.
 name: Monthly routing data
 
 on:
@@ -36,12 +38,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: markettner/Navitals
-          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
       - name: Mirror BRouter tiles
         env:
-          GH_TOKEN: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          GH_TOKEN: ${{ secrets.NAVITALS_BROUTER_TOKEN }}
         run: python3 navitals/tools/brouter/mirror_tiles.py
 
   regions:
@@ -52,7 +54,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: markettner/Navitals
-          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
       - id: list
@@ -76,7 +78,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: markettner/Navitals
-          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
       - name: Install Valhalla's tile builders
@@ -109,7 +111,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: markettner/Navitals
-          token: ${{ secrets.NAVITALS_PIPELINE_TOKEN }}
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
       - uses: actions/download-artifact@v4
