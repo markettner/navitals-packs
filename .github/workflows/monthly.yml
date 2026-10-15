@@ -1,14 +1,16 @@
 # Monthly refresh of the offline routing data, on the 1st:
 #   1. copy BRouter's tiles from brouter.de to navitals-brouter (only the ones rebuilt since),
-#   2. rebuild every region's Valhalla pack from current OpenStreetMap extracts,
-#   3. replace the packs in place on the `packs` release and rewrite index.json.
+#   2. rebuild every region's Valhalla pack and search index from current OpenStreetMap extracts,
+#   3. replace the search indexes in place on navitals-search's `search` release,
+#   4. replace the packs in place on the `packs` release and rewrite index.json.
 # Both halves come from OSM data days apart, which keeps matching a BRouter line onto Valhalla's
 # graph from tripping over ways that exist in only one of them.
 #
 # The build scripts live in the private app repo (tools/), checked out with NAVITALS_TOOLS_TOKEN
 # (fine-grained, Contents read on markettner/Navitals only). The mirror writes to navitals-brouter
-# with NAVITALS_BROUTER_TOKEN (Contents write on that repo only): a fine-grained token grants the
-# same access to every repo it covers, so read and write are two tokens. Everything written here
+# with NAVITALS_BROUTER_TOKEN (Contents write on that repo only), and the search indexes go to
+# navitals-search with NAVITALS_SEARCH_TOKEN (Contents write on that repo only): a fine-grained
+# token grants the same access to every repo it covers, so each write is its own token. Everything written here
 # uses this repo's own GITHUB_TOKEN.
 name: Monthly routing data
 
@@ -81,12 +83,13 @@ jobs:
           token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
-      - name: Install Valhalla's tile builders
+      - name: Install Valhalla's tile builders and the search index builder
         # 3.7.x only: valhalla-mobile 0.6.3 in the app reads 3.6.3 tiles, and 3.8 changed the header.
+        # pyosmium and shapely build the search index (build_search.py).
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq zsh
           python3 -m venv navitals/tools/packs/.work/venv
-          navitals/tools/packs/.work/venv/bin/pip install -q "pyvalhalla==3.7.*"
+          navitals/tools/packs/.work/venv/bin/pip install -q "pyvalhalla==3.7.*" "osmium==4.3.*" "shapely==2.*"
       - name: Build ${{ matrix.id }}
         run: zsh navitals/tools/packs/build_regions.sh ${{ matrix.id }}
       - uses: actions/upload-artifact@v4
@@ -95,6 +98,7 @@ jobs:
           path: |
             navitals/tools/packs/.work/out/${{ matrix.id }}/valhalla_tiles.tar.gz
             navitals/tools/packs/.work/out/${{ matrix.id }}/pack.json
+            navitals/tools/packs/.work/out/${{ matrix.id }}/search.sqlite.gz
           retention-days: 3
 
   publish:
@@ -104,6 +108,9 @@ jobs:
     if: ${{ !cancelled() && needs.build.result == 'success' && needs.mirror.result != 'failure' }}
     runs-on: ubuntu-24.04
     concurrency: navitals-index
+    env:
+      # A step's `if` cannot see secrets, nor its own env; this flag it can.
+      HAS_SEARCH_TOKEN: ${{ secrets.NAVITALS_SEARCH_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -118,11 +125,18 @@ jobs:
         with:
           pattern: pack-*
           path: out
+      - run: for d in out/pack-*; do mv "$d" "out/${d#out/pack-}"; done
+      - name: Publish search indexes
+        # Before the index, which lists a region's search index only once it is on navitals-search.
+        # Skipped until the secret exists; the packs are published either way.
+        env:
+          GH_TOKEN: ${{ secrets.NAVITALS_SEARCH_TOKEN }}
+        if: env.HAS_SEARCH_TOKEN == 'true'
+        run: python3 navitals/tools/packs/publish_search.py out/*/
       - name: Publish packs and index
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           git -C packs-repo config user.name "github-actions[bot]"
           git -C packs-repo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for d in out/pack-*; do mv "$d" "out/${d#out/pack-}"; done
           python3 navitals/tools/packs/publish_packs.py --index-checkout packs-repo out/*/
