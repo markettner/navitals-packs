@@ -62,10 +62,14 @@
       ],
       "sizeBytes": 371159040,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:21:22.909417Z",
+      "builtAt": "2026-10-15T10:46:15.172876Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-brandenburg.tar.gz",
-      "archiveBytes": 126382503,
-      "archiveSHA256": "6edc1b783e6124107125e713e42c3644ce9a8082c63be743b0f26bb2e198591a",
+      "archiveBytes": 126380649,
+      "archiveSHA256": "25c55214951fc886729e057fe5d6e2c07c78da72288f660528f866d15e809655",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-brandenburg.search.sqlite.gz",
+      "searchBytes": 32970000,
+      "searchSizeBytes": 82763776,
+      "searchSHA256": "0efca313fc90e72c1cc1094b8a0c36ad175632199c7d2fb45be604a441519b56",
       "brouterBytes": 42570808
     },
     {
