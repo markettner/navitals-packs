@@ -3,20 +3,30 @@
 # than a runner's disk); one job then merges them and builds the tiles in a single pass, since a
 # EuroVelo superroute spans a dozen countries and only carries its name where one pass sees all of
 # it. The result is a new release `overlays-<date>`, and index.json points the app at it.
+# A last job mirrors that build to the Cloudflare R2 bucket `navitals-packs`, which the web planner
+# reads (a browser cannot read release assets: GitHub sends them without CORS headers).
 #
-# Scripts come from the private app repo with NAVITALS_TOOLS_TOKEN (see monthly.yml).
+# Scripts come from the private app repo with NAVITALS_TOOLS_TOKEN (see monthly.yml). The mirror
+# writes with R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY and R2_ENDPOINT, an R2 account API token with
+# Object Read & Write on that bucket only, and skips itself while they are missing.
 name: Quarterly route overlays
 
 on:
   schedule:
     - cron: "0 3 1 1,4,7,10 *"
   workflow_dispatch:
+    inputs:
+      mirror_only:
+        description: "Only mirror the overlay index.json names to R2, without rebuilding"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 jobs:
   countries:
+    if: ${{ !inputs.mirror_only }}
     runs-on: ubuntu-24.04
     outputs:
       list: ${{ steps.list.outputs.list }}
@@ -108,3 +118,33 @@ jobs:
           git -C packs-repo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           python3 navitals/tools/overlays/publish_overlay.py --index-checkout packs-repo \
             navitals/tools/overlays/.work/out/europe.pmtiles
+
+  mirror:
+    # After the build, or on its own with mirror_only. It reads the build from its release rather
+    # than from the build job, so both ways run the same path.
+    needs: build
+    if: ${{ !cancelled() && (needs.build.result == 'success' || (inputs.mirror_only && needs.build.result == 'skipped')) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    concurrency: navitals-r2
+    env:
+      # A step's `if` cannot see secrets, nor its own env; this flag it can.
+      HAS_R2: ${{ secrets.R2_ACCESS_KEY_ID != '' && secrets.R2_SECRET_ACCESS_KEY != '' && secrets.R2_ENDPOINT != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - name: Mirror the overlay to R2
+        # Skipped until the secrets exist; the app's release and index are published either way.
+        if: env.HAS_R2 == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: |
+          python3 -m doctest navitals/tools/pipelines/r2.py
+          python3 navitals/tools/overlays/mirror_r2.py
