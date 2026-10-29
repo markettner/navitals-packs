@@ -4,7 +4,9 @@
 # EuroVelo superroute spans a dozen countries and only carries its name where one pass sees all of
 # it. The result is a new release `overlays-<date>`, and index.json points the app at it.
 # A last job mirrors that build to the Cloudflare R2 bucket `navitals-packs`, which the web planner
-# reads (a browser cannot read release assets: GitHub sends them without CORS headers).
+# reads (a browser cannot read release assets: GitHub sends them without CORS headers). Another cuts
+# each region's part out of it for the regions' offline maps (plan Phase 7m) and replaces those on
+# navitals-maps, with NAVITALS_MAPS_TOKEN (see monthly.yml), skipped while it is missing.
 #
 # Scripts come from the private app repo with NAVITALS_TOOLS_TOKEN (see monthly.yml). The mirror
 # writes with R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY and R2_ENDPOINT, an R2 account API token with
@@ -148,3 +150,43 @@ jobs:
         run: |
           python3 -m doctest navitals/tools/pipelines/r2.py
           python3 navitals/tools/overlays/mirror_r2.py
+
+  region-overlays:
+    # The new build's cut for every region, so an offline map's overlay is never a quarter behind.
+    # Only after a build: a mirror_only run changes nothing the regions hold.
+    needs: build
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency: navitals-index
+    env:
+      # A step's `if` cannot see secrets, nor its own env; this flag it can.
+      HAS_MAPS_TOKEN: ${{ secrets.NAVITALS_MAPS_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.HAS_MAPS_TOKEN == 'true'
+        with:
+          path: packs-repo
+      - uses: actions/checkout@v4
+        if: env.HAS_MAPS_TOKEN == 'true'
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - name: Cut and publish each region's overlay
+        if: env.HAS_MAPS_TOKEN == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.NAVITALS_MAPS_TOKEN }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq zsh
+          python3 -m venv navitals/tools/maps/.work/venv
+          curl -fsSL -o /tmp/pmtiles.tar.gz https://github.com/protomaps/go-pmtiles/releases/download/v1.31.2/go-pmtiles_1.31.2_Linux_x86_64.tar.gz
+          echo "3ed7dbf4ec2e6dfe5e25b6f70d1ffc932729f93c86db353bf514dd71010a312f  /tmp/pmtiles.tar.gz" | sha256sum -c -
+          sudo tar -xzf /tmp/pmtiles.tar.gz -C /usr/local/bin pmtiles
+          # The build job pushed the new version to index.json before this job checked it out.
+          export OVERLAY_VERSION=$(jq -r .overlay.version packs-repo/index.json)
+          zsh navitals/tools/maps/build_map.sh --overlay-only
+          git -C packs-repo config user.name "github-actions[bot]"
+          git -C packs-repo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 navitals/tools/maps/publish_maps.py --index-checkout packs-repo navitals/tools/maps/.work/out/*/
