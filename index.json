@@ -60,16 +60,16 @@
         14.77,
         53.56
       ],
-      "sizeBytes": 371159040,
+      "sizeBytes": 371660800,
       "hasElevation": false,
-      "builtAt": "2026-10-15T10:46:15.172876Z",
+      "builtAt": "2026-10-29T14:57:55.307488Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-brandenburg.tar.gz",
-      "archiveBytes": 126380649,
-      "archiveSHA256": "25c55214951fc886729e057fe5d6e2c07c78da72288f660528f866d15e809655",
+      "archiveBytes": 126558702,
+      "archiveSHA256": "6f7ec49e55a39179fa73b9048ab76281cc84c4f94f3094bfd2faa844667c1a7b",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-brandenburg.search.sqlite.gz",
-      "searchBytes": 32970000,
-      "searchSizeBytes": 82763776,
-      "searchSHA256": "0efca313fc90e72c1cc1094b8a0c36ad175632199c7d2fb45be604a441519b56",
+      "searchBytes": 32994097,
+      "searchSizeBytes": 82821120,
+      "searchSHA256": "d5f2d3fe9e418efc284a00b480489ffe7d987b165abfb1ceb6c47135dbf1edd8",
       "brouterBytes": 42570808
     },
     {
