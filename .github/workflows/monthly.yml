@@ -2,7 +2,9 @@
 #   1. copy BRouter's tiles from brouter.de to navitals-brouter (only the ones rebuilt since),
 #   2. rebuild every region's Valhalla pack and search index from current OpenStreetMap extracts,
 #   3. replace the search indexes in place on navitals-search's `search` release,
-#   4. replace the packs in place on the `packs` release and rewrite index.json.
+#   4. replace the packs in place on the `packs` release and rewrite index.json,
+#   5. copy the tiles from navitals-brouter to the Cloudflare R2 bucket `navitals-packs`, where the
+#      web planner's on-device engine streams them (GitHub serves release assets without CORS).
 # Both halves come from OSM data days apart, which keeps matching a BRouter line onto Valhalla's
 # graph from tripping over ways that exist in only one of them.
 #
@@ -11,7 +13,8 @@
 # with NAVITALS_BROUTER_TOKEN (Contents write on that repo only), and the search indexes go to
 # navitals-search with NAVITALS_SEARCH_TOKEN (Contents write on that repo only): a fine-grained
 # token grants the same access to every repo it covers, so each write is its own token. Everything written here
-# uses this repo's own GITHUB_TOKEN.
+# uses this repo's own GITHUB_TOKEN. The R2 copy writes with R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
+# and R2_ENDPOINT (see overlays.yml) and skips itself while they are missing.
 name: Monthly routing data
 
 on:
@@ -27,13 +30,17 @@ on:
         description: "Copy BRouter tiles from brouter.de first"
         type: boolean
         default: true
+      r2_only:
+        description: "Only copy the tiles navitals-brouter has to R2, nothing else"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 jobs:
   mirror:
-    if: github.event_name == 'schedule' || inputs.mirror
+    if: ${{ github.event_name == 'schedule' || (inputs.mirror && !inputs.r2_only) }}
     runs-on: ubuntu-24.04
     timeout-minutes: 240
     steps:
@@ -48,7 +55,37 @@ jobs:
           GH_TOKEN: ${{ secrets.NAVITALS_BROUTER_TOKEN }}
         run: python3 navitals/tools/brouter/mirror_tiles.py
 
+  tiles-r2:
+    # After the mirror, or on its own (r2_only, or a run without the mirror). It reads tiles.json
+    # from navitals-brouter's release, so every way runs the same path; a current bucket uploads
+    # nothing.
+    needs: mirror
+    if: ${{ !cancelled() && needs.mirror.result != 'failure' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    concurrency: navitals-r2
+    env:
+      # A step's `if` cannot see secrets, nor its own env; this flag it can.
+      HAS_R2: ${{ secrets.R2_ACCESS_KEY_ID != '' && secrets.R2_SECRET_ACCESS_KEY != '' && secrets.R2_ENDPOINT != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - name: Copy the BRouter tiles to R2
+        if: env.HAS_R2 == 'true'
+        env:
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: |
+          python3 -m doctest navitals/tools/pipelines/r2.py
+          python3 navitals/tools/brouter/mirror_r2.py
+
   regions:
+    if: ${{ !inputs.r2_only }}
     runs-on: ubuntu-24.04
     outputs:
       ids: ${{ steps.list.outputs.ids }}
