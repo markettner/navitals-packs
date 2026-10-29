@@ -70,7 +70,15 @@
       "searchBytes": 32994097,
       "searchSizeBytes": 82821120,
       "searchSHA256": "d5f2d3fe9e418efc284a00b480489ffe7d987b165abfb1ceb6c47135dbf1edd8",
-      "brouterBytes": 42570808
+      "brouterBytes": 42570808,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-brandenburg.map.pmtiles",
+      "mapBytes": 60144133,
+      "mapSHA256": "9049bd9641091f1eac6ac4bfaabb934bf3206f867cd63702d3894544f6b829a4",
+      "mapBuiltAt": "2026-10-29T15:02:28Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-brandenburg.overlay.pmtiles",
+      "overlayBytes": 4157061,
+      "overlaySHA256": "5ae3c5c22cc0682703c6b6782f6bdb8ce6aa6495e7ab35d2591a0b90889e6ab2",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-hessen",
