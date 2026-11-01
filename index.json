@@ -9,13 +9,17 @@
         17.16,
         49.02
       ],
-      "sizeBytes": 810414080,
+      "sizeBytes": 812441600,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:28:18.875607Z",
+      "builtAt": "2026-11-01T08:41:50.953577Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/at.tar.gz",
-      "archiveBytes": 312735216,
-      "archiveSHA256": "1e1a4760e7293568cf229d579cca8eb654a36ef2a5bc87259f003effd38ffd88",
-      "brouterBytes": 181860398
+      "archiveBytes": 313433638,
+      "archiveSHA256": "ae063e8415255a7fd988d44c10e049108ca5aaaf2b02c2268b19cc65b853f7a8",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/at.search.sqlite.gz",
+      "searchBytes": 79989486,
+      "searchSizeBytes": 208969728,
+      "searchSHA256": "236145e5858b5f8b2e913af11a16529fa641a035cff04e4684ae3b51e24f2d2d",
+      "brouterBytes": 182122835
     },
     {
       "id": "de-baden-wuerttemberg",
@@ -26,13 +30,17 @@
         10.51,
         49.79
       ],
-      "sizeBytes": 720312320,
+      "sizeBytes": 722083840,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:23:51.562263Z",
+      "builtAt": "2026-11-01T08:39:09.537332Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-baden-wuerttemberg.tar.gz",
-      "archiveBytes": 266079185,
-      "archiveSHA256": "96c484b728b2a9679974ec8102ec6feaba943f7fb714d2f22b76d0353b239f10",
-      "brouterBytes": 90381179
+      "archiveBytes": 266675384,
+      "archiveSHA256": "3350ceb1e7f5d27024103f05cf22c317adcd8176ce66ffdb1c7dd084e9330b3a",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-baden-wuerttemberg.search.sqlite.gz",
+      "searchBytes": 81386161,
+      "searchSizeBytes": 207679488,
+      "searchSHA256": "90b0b999ee9db249db10b9a2af2ac88c3656e6cddb1ae8ab71b84246d2e4a5f4",
+      "brouterBytes": 90535747
     },
     {
       "id": "de-bayern",
@@ -43,13 +51,17 @@
         13.85,
         50.57
       ],
-      "sizeBytes": 1003038720,
+      "sizeBytes": 1004666880,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:28:05.827534Z",
+      "builtAt": "2026-11-01T08:46:56.665272Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-bayern.tar.gz",
-      "archiveBytes": 367351873,
-      "archiveSHA256": "cf961d2b38f278aa6f0b9455db2f3e49e2a750d0f200375f35b14c9d470751be",
-      "brouterBytes": 158940789
+      "archiveBytes": 367906096,
+      "archiveSHA256": "dfde72257f4c296bcfec0fe0ca576c2006b97a5d6b0dbaac1f625980855f5087",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-bayern.search.sqlite.gz",
+      "searchBytes": 84789609,
+      "searchSizeBytes": 213966848,
+      "searchSHA256": "52c4e93cc987d220a5ec874f23047e27d420c70f1e93d186f0bd4d96d840f36b",
+      "brouterBytes": 159202784
     },
     {
       "id": "de-brandenburg",
@@ -60,17 +72,17 @@
         14.77,
         53.56
       ],
-      "sizeBytes": 371660800,
+      "sizeBytes": 371763200,
       "hasElevation": false,
-      "builtAt": "2026-10-29T14:57:55.307488Z",
+      "builtAt": "2026-11-01T08:29:56.449206Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-brandenburg.tar.gz",
-      "archiveBytes": 126558702,
-      "archiveSHA256": "6f7ec49e55a39179fa73b9048ab76281cc84c4f94f3094bfd2faa844667c1a7b",
+      "archiveBytes": 126585569,
+      "archiveSHA256": "dedf099ec017e613ac612ccfd10574682a6110bc12338e3de454d0e19714e4a6",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-brandenburg.search.sqlite.gz",
-      "searchBytes": 32994097,
-      "searchSizeBytes": 82821120,
-      "searchSHA256": "d5f2d3fe9e418efc284a00b480489ffe7d987b165abfb1ceb6c47135dbf1edd8",
-      "brouterBytes": 42570808,
+      "searchBytes": 33001494,
+      "searchSizeBytes": 82833408,
+      "searchSHA256": "453cdd2987b0b909f12ae72697d1b07a362a90b140655210c204d95447610b06",
+      "brouterBytes": 42652686,
       "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-brandenburg.map.pmtiles",
       "mapBytes": 60144133,
       "mapSHA256": "9049bd9641091f1eac6ac4bfaabb934bf3206f867cd63702d3894544f6b829a4",
@@ -89,13 +101,17 @@
         10.25,
         51.66
       ],
-      "sizeBytes": 357734400,
+      "sizeBytes": 358123520,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:26:56.946961Z",
+      "builtAt": "2026-11-01T08:44:19.771221Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-hessen.tar.gz",
-      "archiveBytes": 133223894,
-      "archiveSHA256": "b2fd9f4b113305139102bf905c210329b239920368c3a2593f535ad0484b9634",
-      "brouterBytes": 65428253
+      "archiveBytes": 133374678,
+      "archiveSHA256": "e9d538086cf90f0305d1925618eed4664712f11801a052c370a94cd5145fa6fd",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-hessen.search.sqlite.gz",
+      "searchBytes": 43137796,
+      "searchSizeBytes": 109674496,
+      "searchSHA256": "89d781479ba20e681e370d9a1c5c53e719ed2b2e8bcf553c021d8c56dceb8c20",
+      "brouterBytes": 65521500
     },
     {
       "id": "de-niedersachsen",
@@ -106,13 +122,17 @@
         11.61,
         54.24
       ],
-      "sizeBytes": 586475520,
+      "sizeBytes": 587520000,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:34:40.062597Z",
+      "builtAt": "2026-11-01T09:01:56.219549Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-niedersachsen.tar.gz",
-      "archiveBytes": 201875428,
-      "archiveSHA256": "211e8a8a5d7de96f6ebd8f9325196476a6389103e6e865612a402192b14b3af8",
-      "brouterBytes": 109814144
+      "archiveBytes": 202241098,
+      "archiveSHA256": "9b68dad5a038f35c709816404f0d1944c788514e3f31d79ddf8ce95eb88c7e77",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-niedersachsen.search.sqlite.gz",
+      "searchBytes": 68324062,
+      "searchSizeBytes": 168554496,
+      "searchSHA256": "8f95d4ba9b407c41043c8f945a9a10f2841d3095f1fd1651f3294c474a732d0d",
+      "brouterBytes": 109996338
     },
     {
       "id": "de-mecklenburg-vorpommern",
@@ -123,13 +143,17 @@
         14.42,
         54.98
       ],
-      "sizeBytes": 120832000,
+      "sizeBytes": 121088000,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:26:14.141516Z",
+      "builtAt": "2026-11-01T08:52:02.090664Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-mecklenburg-vorpommern.tar.gz",
-      "archiveBytes": 43733818,
-      "archiveSHA256": "67442df1e4ea1422741be1a8df7f4b336cef771f76e26e9d06723a7cc08242c7",
-      "brouterBytes": 15259355
+      "archiveBytes": 43826692,
+      "archiveSHA256": "b9070727483ee4f9fb23301be3d72e5b098312236bd9c565c9f4df59168627f9",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-mecklenburg-vorpommern.search.sqlite.gz",
+      "searchBytes": 13249095,
+      "searchSizeBytes": 32706560,
+      "searchSHA256": "aee2015b405c43cc9a4c8a6de4a8fde367ff4b18452decf9e58dbad69ee82f0b",
+      "brouterBytes": 15291674
     },
     {
       "id": "de-nordrhein-westfalen",
@@ -140,13 +164,17 @@
         9.47,
         52.53
       ],
-      "sizeBytes": 836055040,
+      "sizeBytes": 837212160,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:41:11.401586Z",
+      "builtAt": "2026-11-01T09:21:28.186774Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-nordrhein-westfalen.tar.gz",
-      "archiveBytes": 300601094,
-      "archiveSHA256": "300b98641faaf9d1810b5ae1bc69182e9fc8e2bfb55805f143ae18a0cea673bf",
-      "brouterBytes": 101368566
+      "archiveBytes": 300965023,
+      "archiveSHA256": "daab133e284e9a09fd2f154ce4766f2d6b1ec67f1702b538f5221982673284bd",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-nordrhein-westfalen.search.sqlite.gz",
+      "searchBytes": 101947704,
+      "searchSizeBytes": 263114752,
+      "searchSHA256": "2b6bb738090ccd7bee3ee78531f973737bdf29ac53e28ab41fbb621a501bde33",
+      "brouterBytes": 101507247
     },
     {
       "id": "de-rheinland-pfalz",
@@ -157,13 +185,17 @@
         8.51,
         50.94
       ],
-      "sizeBytes": 281804800,
+      "sizeBytes": 282163200,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:32:27.897290Z",
+      "builtAt": "2026-11-01T09:10:32.864680Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-rheinland-pfalz.tar.gz",
-      "archiveBytes": 107489495,
-      "archiveSHA256": "86b5a478c08ae67e70f3f5fa1cffcd72efae7c9952b3f434f4e9831410e5a0f9",
-      "brouterBytes": 60916950
+      "archiveBytes": 107621673,
+      "archiveSHA256": "608ebe5150376020e7747efaee7cf6927f84fa9213e031320e0e3f243fa52a47",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-rheinland-pfalz.search.sqlite.gz",
+      "searchBytes": 32152388,
+      "searchSizeBytes": 80265216,
+      "searchSHA256": "67b66b69656c040fa6df28eb8d875cec8385cbc2ef0dd57e72c985669872170a",
+      "brouterBytes": 61007884
     },
     {
       "id": "de-saarland",
@@ -174,13 +206,17 @@
         7.41,
         49.64
       ],
-      "sizeBytes": 46571520,
+      "sizeBytes": 46602240,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:29:27.401011Z",
+      "builtAt": "2026-11-01T09:06:23.054383Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-saarland.tar.gz",
-      "archiveBytes": 17471600,
-      "archiveSHA256": "3a510cde86f74b2f9302d3a412d10ac957400e515a38459ba12748e62e756db5",
-      "brouterBytes": 7518061
+      "archiveBytes": 17485171,
+      "archiveSHA256": "b5d85740b52d56c86ee8fad8f2cfb34f8d89d99b83a23eae96201d35e16d0734",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-saarland.search.sqlite.gz",
+      "searchBytes": 7130651,
+      "searchSizeBytes": 18685952,
+      "searchSHA256": "3792f6d98c8ca3bb662d21835c1320191a0800ecd83432e5788d2f9fa4c2313d",
+      "brouterBytes": 7529205
     },
     {
       "id": "de-sachsen",
@@ -191,13 +227,17 @@
         15.05,
         51.69
       ],
-      "sizeBytes": 292311040,
+      "sizeBytes": 292956160,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:34:09.657520Z",
+      "builtAt": "2026-11-01T09:15:15.792210Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-sachsen.tar.gz",
-      "archiveBytes": 106019523,
-      "archiveSHA256": "3b54728d01b01360545f010ce4d53aa8fd48f8190b61a9ab98d3ce45e32c3d86",
-      "brouterBytes": 40836849
+      "archiveBytes": 106236891,
+      "archiveSHA256": "0c5c6ef55997ad31b02bcc19aa231eddd5fac55aa6d8aec4809fbcbb6b542b5c",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-sachsen.search.sqlite.gz",
+      "searchBytes": 30235921,
+      "searchSizeBytes": 74084352,
+      "searchSHA256": "36cdbb20dc2d31cf796d0fd19a21d031233aba0cf15a026950f62bd572c4515d",
+      "brouterBytes": 40923272
     },
     {
       "id": "de-sachsen-anhalt",
@@ -208,13 +248,17 @@
         13.21,
         53.06
       ],
-      "sizeBytes": 158136320,
+      "sizeBytes": 158484480,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:34:54.685541Z",
+      "builtAt": "2026-11-01T09:12:58.333315Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-sachsen-anhalt.tar.gz",
-      "archiveBytes": 59004872,
-      "archiveSHA256": "d0393df118403967097d8dc23a395e6fe3084124fa788a70d33bfc3ea3f12d6c",
-      "brouterBytes": 33901966
+      "archiveBytes": 59119155,
+      "archiveSHA256": "6ecf755852b6aa8d8f6bc6de21d94448eb599478628d7d65a8f5cfb5e7a2d5a0",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-sachsen-anhalt.search.sqlite.gz",
+      "searchBytes": 17285475,
+      "searchSizeBytes": 43196416,
+      "searchSHA256": "4127c4c42905a13aee3f892f3ae656968c7e75181073e985726da63b379f7f78",
+      "brouterBytes": 33952271
     },
     {
       "id": "de-schleswig-holstein",
@@ -225,13 +269,17 @@
         11.8,
         55.15
       ],
-      "sizeBytes": 238325760,
+      "sizeBytes": 238561280,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:37:38.252581Z",
+      "builtAt": "2026-11-01T09:20:06.864530Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-schleswig-holstein.tar.gz",
-      "archiveBytes": 82806692,
-      "archiveSHA256": "a80017d1715409a166d5a31daf8228a5d50812794a782cdd30f4e5fcfc55c262",
-      "brouterBytes": 25816197
+      "archiveBytes": 82892884,
+      "archiveSHA256": "37c925a4dfd6f625c5ae6d483d61351d6c720c25a6960c0795dcf291271372f5",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-schleswig-holstein.search.sqlite.gz",
+      "searchBytes": 26615448,
+      "searchSizeBytes": 66433024,
+      "searchSHA256": "5bcaefdc7a54e46418d69b9a97c2e6b3da0677d21f4140476479568fa44b71c0",
+      "brouterBytes": 25865308
     },
     {
       "id": "ch",
@@ -242,13 +290,17 @@
         10.5,
         47.81
       ],
-      "sizeBytes": 633825280,
+      "sizeBytes": 634808320,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:46:23.217567Z",
+      "builtAt": "2026-11-01T09:40:02.833961Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/ch.tar.gz",
-      "archiveBytes": 239375463,
-      "archiveSHA256": "c28d6a47604671259449a4cbece222b1aca9354374849b2162793412ab23508c",
-      "brouterBytes": 108815084
+      "archiveBytes": 239739925,
+      "archiveSHA256": "507d889c0a1f4bae4c53c05bf3a5760374ceab32d47ec80c021dc6043d1ea187",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/ch.search.sqlite.gz",
+      "searchBytes": 67408504,
+      "searchSizeBytes": 169971712,
+      "searchSHA256": "ad29d50596f5253ba34874a1ed939400b81bb71f75d20dd3bc5d379a3caed047",
+      "brouterBytes": 109017015
     },
     {
       "id": "de-thueringen",
@@ -259,13 +311,17 @@
         12.66,
         51.65
       ],
-      "sizeBytes": 167045120,
+      "sizeBytes": 167311360,
       "hasElevation": false,
-      "builtAt": "2026-10-15T09:37:07.571214Z",
+      "builtAt": "2026-11-01T09:19:17.580488Z",
       "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-thueringen.tar.gz",
-      "archiveBytes": 63084142,
-      "archiveSHA256": "fe227ff2afeb6c0a799a8d79801d06ed2bc8643c7206c8d5796bd996840f0387",
-      "brouterBytes": 35875095
+      "archiveBytes": 63184679,
+      "archiveSHA256": "ca0742469ae1f3e995137769b03dd0e3c89b8a73f7174b6ad93d6671616a7977",
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-thueringen.search.sqlite.gz",
+      "searchBytes": 16262399,
+      "searchSizeBytes": 40071168,
+      "searchSHA256": "10395603d857ec8d5742547b77a49c92b2eddad9b95072d65165d4319c1c0d22",
+      "brouterBytes": 35927759
     }
   ],
   "overlay": {
