@@ -19,7 +19,15 @@
       "searchBytes": 79989486,
       "searchSizeBytes": 208969728,
       "searchSHA256": "236145e5858b5f8b2e913af11a16529fa641a035cff04e4684ae3b51e24f2d2d",
-      "brouterBytes": 182122835
+      "brouterBytes": 182122835,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/at.map.pmtiles",
+      "mapBytes": 198263774,
+      "mapSHA256": "57dedd0533064e946aaa0095d794640829101dc48ad2e1c6497b926f2b07a09e",
+      "mapBuiltAt": "2026-11-01T11:14:47Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/at.overlay.pmtiles",
+      "overlayBytes": 27255356,
+      "overlaySHA256": "a1f6a7a062db34cc269018f46840053a88e839b489d91d02a0ea8396c99b924e",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-baden-wuerttemberg",
@@ -40,7 +48,15 @@
       "searchBytes": 81386161,
       "searchSizeBytes": 207679488,
       "searchSHA256": "90b0b999ee9db249db10b9a2af2ac88c3656e6cddb1ae8ab71b84246d2e4a5f4",
-      "brouterBytes": 90535747
+      "brouterBytes": 90535747,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-baden-wuerttemberg.map.pmtiles",
+      "mapBytes": 127648728,
+      "mapSHA256": "ff79b6839c943a84d1965c0cc3b709e2bd6252f0a288411c320a35b56d9dce7b",
+      "mapBuiltAt": "2026-11-01T11:14:53Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-baden-wuerttemberg.overlay.pmtiles",
+      "overlayBytes": 12678000,
+      "overlaySHA256": "1f337abe53679870de9f1fb5a557ec36a232471face715fc81bdeb314bbcf908",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-bayern",
@@ -61,7 +77,15 @@
       "searchBytes": 84789609,
       "searchSizeBytes": 213966848,
       "searchSHA256": "52c4e93cc987d220a5ec874f23047e27d420c70f1e93d186f0bd4d96d840f36b",
-      "brouterBytes": 159202784
+      "brouterBytes": 159202784,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-bayern.map.pmtiles",
+      "mapBytes": 190761151,
+      "mapSHA256": "5457a0b9b9fc6e90d8ac90a2e440f474b128d753a39dcf966efa4c850aa4908b",
+      "mapBuiltAt": "2026-11-01T11:14:57Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-bayern.overlay.pmtiles",
+      "overlayBytes": 23347612,
+      "overlaySHA256": "7aaf2f1397108d6746ab4dee9acbd5b7c0fb6dc32df0c675e6160834370cbbc7",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-brandenburg",
@@ -84,9 +108,9 @@
       "searchSHA256": "453cdd2987b0b909f12ae72697d1b07a362a90b140655210c204d95447610b06",
       "brouterBytes": 42652686,
       "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-brandenburg.map.pmtiles",
-      "mapBytes": 60144133,
-      "mapSHA256": "9049bd9641091f1eac6ac4bfaabb934bf3206f867cd63702d3894544f6b829a4",
-      "mapBuiltAt": "2026-10-29T15:02:28Z",
+      "mapBytes": 60148947,
+      "mapSHA256": "2773d7b64cad69913ef293f58cdd97c12b951d79e1c4aead54c8d18cb4f84df3",
+      "mapBuiltAt": "2026-11-01T11:14:58Z",
       "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-brandenburg.overlay.pmtiles",
       "overlayBytes": 4157061,
       "overlaySHA256": "5ae3c5c22cc0682703c6b6782f6bdb8ce6aa6495e7ab35d2591a0b90889e6ab2",
@@ -111,7 +135,15 @@
       "searchBytes": 43137796,
       "searchSizeBytes": 109674496,
       "searchSHA256": "89d781479ba20e681e370d9a1c5c53e719ed2b2e8bcf553c021d8c56dceb8c20",
-      "brouterBytes": 65521500
+      "brouterBytes": 65521500,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-hessen.map.pmtiles",
+      "mapBytes": 67085466,
+      "mapSHA256": "03e8a03991e25cc0e3c0354de7c002ec4327e033ba0e66b6c17f60a2ea65a90a",
+      "mapBuiltAt": "2026-11-01T11:15:00Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-hessen.overlay.pmtiles",
+      "overlayBytes": 11219845,
+      "overlaySHA256": "cfe733a978beb0e923b6e18d2d16651d52ec6bcfab1f8566f8b7da3d354ca8f0",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-niedersachsen",
@@ -132,7 +164,15 @@
       "searchBytes": 68324062,
       "searchSizeBytes": 168554496,
       "searchSHA256": "8f95d4ba9b407c41043c8f945a9a10f2841d3095f1fd1651f3294c474a732d0d",
-      "brouterBytes": 109996338
+      "brouterBytes": 109996338,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-niedersachsen.map.pmtiles",
+      "mapBytes": 116735008,
+      "mapSHA256": "49b069a5173cda67770f180405082fe7d2a5304d1163993a44657d2cfaa59df6",
+      "mapBuiltAt": "2026-11-01T11:15:03Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-niedersachsen.overlay.pmtiles",
+      "overlayBytes": 15842582,
+      "overlaySHA256": "d485cb2aed11af11ae9f6e3004f23a57ce066cb9766c3f9b8895bd2b9ea5d0a7",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-mecklenburg-vorpommern",
@@ -153,7 +193,15 @@
       "searchBytes": 13249095,
       "searchSizeBytes": 32706560,
       "searchSHA256": "aee2015b405c43cc9a4c8a6de4a8fde367ff4b18452decf9e58dbad69ee82f0b",
-      "brouterBytes": 15291674
+      "brouterBytes": 15291674,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-mecklenburg-vorpommern.map.pmtiles",
+      "mapBytes": 40990747,
+      "mapSHA256": "4b052e65803b8a8488ba8f9c07105d873d9867d1df6b93ffc39fba9424c9b65c",
+      "mapBuiltAt": "2026-11-01T11:15:01Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-mecklenburg-vorpommern.overlay.pmtiles",
+      "overlayBytes": 2739450,
+      "overlaySHA256": "39338072c0087dad3044e1c3d14c71bb73229ff424cf01dd39637ecd3364a4ee",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-nordrhein-westfalen",
@@ -174,7 +222,15 @@
       "searchBytes": 101947704,
       "searchSizeBytes": 263114752,
       "searchSHA256": "2b6bb738090ccd7bee3ee78531f973737bdf29ac53e28ab41fbb621a501bde33",
-      "brouterBytes": 101507247
+      "brouterBytes": 101507247,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-nordrhein-westfalen.map.pmtiles",
+      "mapBytes": 137830917,
+      "mapSHA256": "9caa39001257d9adf37337be831bcb7f5b3639e7591bc1b1a690255f78b1cdc2",
+      "mapBuiltAt": "2026-11-01T11:15:07Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-nordrhein-westfalen.overlay.pmtiles",
+      "overlayBytes": 16469371,
+      "overlaySHA256": "21aa22071d42b895ecd1e3e3b4547965879546a45f807754bb0586f96f1d3a31",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-rheinland-pfalz",
@@ -195,7 +251,15 @@
       "searchBytes": 32152388,
       "searchSizeBytes": 80265216,
       "searchSHA256": "67b66b69656c040fa6df28eb8d875cec8385cbc2ef0dd57e72c985669872170a",
-      "brouterBytes": 61007884
+      "brouterBytes": 61007884,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-rheinland-pfalz.map.pmtiles",
+      "mapBytes": 60598457,
+      "mapSHA256": "5287b75855ffa1838ded4a904a5568910c23f6cbfa80c9e05a09122b6a674b23",
+      "mapBuiltAt": "2026-11-01T11:15:08Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-rheinland-pfalz.overlay.pmtiles",
+      "overlayBytes": 9528393,
+      "overlaySHA256": "5f763bbefd432ff1e0c691851dfcb5d1166a6e74f0ad591ed2d794fb6fd12917",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-saarland",
@@ -216,7 +280,15 @@
       "searchBytes": 7130651,
       "searchSizeBytes": 18685952,
       "searchSHA256": "3792f6d98c8ca3bb662d21835c1320191a0800ecd83432e5788d2f9fa4c2313d",
-      "brouterBytes": 7529205
+      "brouterBytes": 7529205,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-saarland.map.pmtiles",
+      "mapBytes": 9305802,
+      "mapSHA256": "34d09bfc64f825584093d19d8a3103ada8f16a22e108041aea56251a50a478a2",
+      "mapBuiltAt": "2026-11-01T11:15:09Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-saarland.overlay.pmtiles",
+      "overlayBytes": 1714968,
+      "overlaySHA256": "fd395e1756c0471c4e0bb7ead2d36aeceaacbb88b4f7f6d9b6038c2fa14c7519",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-sachsen",
@@ -237,7 +309,15 @@
       "searchBytes": 30235921,
       "searchSizeBytes": 74084352,
       "searchSHA256": "36cdbb20dc2d31cf796d0fd19a21d031233aba0cf15a026950f62bd572c4515d",
-      "brouterBytes": 40923272
+      "brouterBytes": 40923272,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-sachsen.map.pmtiles",
+      "mapBytes": 55931994,
+      "mapSHA256": "3d452398b9ab74374299d112e65ab603527e567982ff0f826ec4d70d78cd5168",
+      "mapBuiltAt": "2026-11-01T11:15:10Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-sachsen.overlay.pmtiles",
+      "overlayBytes": 5997870,
+      "overlaySHA256": "693aab2af06498e957c9d2d90a04bfdcb4bcb638f500a75f2fcaee5c93c0999f",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-sachsen-anhalt",
@@ -258,7 +338,15 @@
       "searchBytes": 17285475,
       "searchSizeBytes": 43196416,
       "searchSHA256": "4127c4c42905a13aee3f892f3ae656968c7e75181073e985726da63b379f7f78",
-      "brouterBytes": 33952271
+      "brouterBytes": 33952271,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-sachsen-anhalt.map.pmtiles",
+      "mapBytes": 40458180,
+      "mapSHA256": "56972d0dcf96bd811dbe83c6cfb530f1cbe5894486f87d98288165f33ab2c7b6",
+      "mapBuiltAt": "2026-11-01T11:15:11Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-sachsen-anhalt.overlay.pmtiles",
+      "overlayBytes": 4119696,
+      "overlaySHA256": "38f9960f412961fcb84129f9e80c55961e486eb505b9f448760d3325bf1f3da6",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-schleswig-holstein",
@@ -279,7 +367,15 @@
       "searchBytes": 26615448,
       "searchSizeBytes": 66433024,
       "searchSHA256": "5bcaefdc7a54e46418d69b9a97c2e6b3da0677d21f4140476479568fa44b71c0",
-      "brouterBytes": 25865308
+      "brouterBytes": 25865308,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-schleswig-holstein.map.pmtiles",
+      "mapBytes": 45445698,
+      "mapSHA256": "855769e9cd3e9ca5334e5ebfbe9a44071f8b7959a756174c38fa575989d8ae9a",
+      "mapBuiltAt": "2026-11-01T11:15:12Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-schleswig-holstein.overlay.pmtiles",
+      "overlayBytes": 3439841,
+      "overlaySHA256": "6ac7c4f7550bea70aada756c6691426d85484696e84901d80f500b7534d5017a",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "ch",
@@ -300,7 +396,15 @@
       "searchBytes": 67408504,
       "searchSizeBytes": 169971712,
       "searchSHA256": "ad29d50596f5253ba34874a1ed939400b81bb71f75d20dd3bc5d379a3caed047",
-      "brouterBytes": 109017015
+      "brouterBytes": 109017015,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/ch.map.pmtiles",
+      "mapBytes": 113606881,
+      "mapSHA256": "1dd3378de37d534fbfdf267972c76a1d828cf51b6c16bc9d5877c9fd9d365daa",
+      "mapBuiltAt": "2026-11-01T11:14:50Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/ch.overlay.pmtiles",
+      "overlayBytes": 14986478,
+      "overlaySHA256": "d5e3a2b24367647ccbbcb3dd60ad793cd7740add2a48deee58914284483cbd97",
+      "overlayVersion": "2026-10-15b"
     },
     {
       "id": "de-thueringen",
@@ -321,7 +425,15 @@
       "searchBytes": 16262399,
       "searchSizeBytes": 40071168,
       "searchSHA256": "10395603d857ec8d5742547b77a49c92b2eddad9b95072d65165d4319c1c0d22",
-      "brouterBytes": 35927759
+      "brouterBytes": 35927759,
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-thueringen.map.pmtiles",
+      "mapBytes": 39739009,
+      "mapSHA256": "b64175ab014fefec73b49bb36754c8d8fe772e9657a224492db9383cc7bc5eed",
+      "mapBuiltAt": "2026-11-01T11:15:13Z",
+      "overlayURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-thueringen.overlay.pmtiles",
+      "overlayBytes": 5739187,
+      "overlaySHA256": "9580507db72f39c888a062efc8ea3524cea03fb9aa185dd4b6d1494313aebee7",
+      "overlayVersion": "2026-10-15b"
     }
   ],
   "overlay": {
