@@ -15,7 +15,7 @@ application source: only `index.json` and the tile archives attached to its rele
   "packs": [
     {
       "id": "de-brandenburg",
-      "name": "Brandenburg & Berlin",
+      "name": "Berlin & Brandenburg",
       "bbox": [11.26, 51.36, 14.77, 53.56],
       "sizeBytes": 370421760,
       "hasElevation": false,
