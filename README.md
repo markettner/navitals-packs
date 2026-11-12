@@ -1,14 +1,14 @@
-# Navitals routing packs
+# Navitals regions
 
-Prebuilt [Valhalla](https://valhalla.github.io/valhalla/) routing tiles for the Navitals iOS app,
-so a route can be planned with no signal at all.
+The index of offline regions for the Navitals iOS app, so a route can be planned and found with no
+signal at all.
 
 This repository is public because the app downloads these files without credentials. It holds no
-application source: only `index.json` and the tile archives attached to its releases.
+application source: only `index.json`, and the route overlay attached to its releases.
 
 ## Using them
 
-`index.json` is what the app fetches. Each entry describes one region and where its archive lives:
+`index.json` is what the app fetches. Each entry describes one region and where its parts live:
 
 ```json
 {
@@ -17,40 +17,48 @@ application source: only `index.json` and the tile archives attached to its rele
       "id": "de-brandenburg",
       "name": "Berlin & Brandenburg",
       "bbox": [11.26, 51.36, 14.77, 53.56],
-      "sizeBytes": 370421760,
+      "sizeBytes": 0,
       "hasElevation": false,
-      "builtAt": "2026-09-17T16:01:50.931355Z",
-      "archiveURL": "https://github.com/markettner/navitals-packs/releases/download/packs/de-brandenburg.tar.gz",
-      "archiveBytes": 126004234,
-      "archiveSHA256": "…",
-      "brouterBytes": 44800000
+      "builtAt": "2026-12-01T08:39:09Z",
+      "brouterBytes": 44800000,
+      "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-brandenburg.search.sqlite.gz",
+      "searchBytes": 30000000,
+      "searchSizeBytes": 80000000,
+      "searchSHA256": "…",
+      "mapURL": "https://github.com/markettner/navitals-maps/releases/download/maps/de-brandenburg.map.pmtiles",
+      "mapBytes": 60000000,
+      "mapSHA256": "…"
     }
   ],
   "overlay": {"version": "2026-10-01", "bounds": [-31.27, 32.63, 46.39, 71.19]}
 }
 ```
 
-`bbox` is `[west, south, east, north]`. The app only uses a pack when it covers *every* waypoint of
-a route, since routing off the edge of the tiles leads into a dead end.
+`bbox` is `[west, south, east, north]`. A region's route data is its cells of the BRouter tiles on
+[navitals-brouter](https://github.com/markettner/navitals-brouter), measured in `brouterBytes`;
+its offline search index is on [navitals-search](https://github.com/markettner/navitals-search),
+its basic map and route overlay cut on [navitals-maps](https://github.com/markettner/navitals-maps).
+
+Until November 2026 every region also carried Valhalla routing tiles, attached here to the `packs`
+release. The app no longer uses them, and they are gone. `sizeBytes` and `hasElevation` described
+them; they stay, empty, because app builds from before then cannot read an entry without them.
 
 ## How it is built
 
 Rebuilt by the workflows in `.github/workflows`, from scripts in the (private) app repository:
 
-- **Monthly** (`monthly.yml`): every region's pack from current Geofabrik extracts, replaced in
-  place on the `packs` release as `<id>.tar.gz`, plus the BRouter tile mirror on
-  [navitals-brouter](https://github.com/markettner/navitals-brouter). The app offers an update when
-  an archive's checksum changes.
+- **Monthly** (`monthly.yml`): the BRouter tile mirror, then every region's search index from
+  current Geofabrik extracts and its basic map, each replaced in place, and the regions in
+  `index.json` rewritten. The app offers an update when a part's checksum changes.
 - **Quarterly** (`overlays.yml`): the cycle and hiking route overlay for Europe, as a new release
   `overlays-<date>`. `index.json`'s `overlay` entry names the current one.
 
-Packs are built with pyvalhalla **3.7.x**. The graph tile header changed in 3.8, and a pack built
-with it will not load in the app's Valhalla 3.6.3 runtime. The releases here are kept under 5 GB in
-total, so there is only ever one generation of packs and two of the overlay.
+The releases here are kept under 5 GB in total, so there are only ever two generations of the
+overlay.
 
 ## Attribution and licence
 
-The tiles are derived from [OpenStreetMap](https://www.openstreetmap.org/copyright) data,
-© OpenStreetMap contributors, and are distributed under the
-[Open Database License](https://opendatacommons.org/licenses/odbl/). Any use of them carries the
+The data is derived from [OpenStreetMap](https://www.openstreetmap.org/copyright),
+© OpenStreetMap contributors, and is distributed under the
+[Open Database License](https://opendatacommons.org/licenses/odbl/). Any use of it carries the
 same attribution requirement.
