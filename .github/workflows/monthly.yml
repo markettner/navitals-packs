@@ -1,9 +1,10 @@
 # Monthly refresh of the offline routing data, on the 1st:
-#   1. copy BRouter's tiles from brouter.de to navitals-brouter (only the ones rebuilt since),
+#   1. copy BRouter's tiles from brouter.de to navitals-brouter and its two sister repos (only the
+#      ones rebuilt since; the planet, split by area, one job per repo),
 #   2. rebuild every region's manifest and search index from current OpenStreetMap extracts,
 #   3. replace the search indexes in place on navitals-search's `search` release,
 #   4. rewrite the regions in index.json, with each region's BRouter cells measured,
-#   5. copy the tiles from navitals-brouter to the Cloudflare R2 bucket `navitals-packs`, where the
+#   5. copy the tiles from those releases to the Cloudflare R2 bucket `navitals-packs`, where the
 #      web planner's on-device engine streams them (GitHub serves release assets without CORS),
 #   6. build every region's basic offline map and overlay cut (plan Phase 7m), replace them in place
 #      on navitals-maps' `maps` release, and list them in index.json.
@@ -11,8 +12,9 @@
 # `packs` release; the app no longer uses them.
 #
 # The build scripts live in the private app repo (tools/), checked out with NAVITALS_TOOLS_TOKEN
-# (fine-grained, Contents read on markettner/Navitals only). The mirror writes to navitals-brouter
-# with NAVITALS_BROUTER_TOKEN (Contents write on that repo only), and the search indexes go to
+# (fine-grained, Contents read on markettner/Navitals only). The mirror writes to navitals-brouter,
+# navitals-brouter-americas and navitals-brouter-world with NAVITALS_BROUTER_TOKEN (Contents write on
+# those three only: they hold the same data, so one token), and the search indexes go to
 # navitals-search with NAVITALS_SEARCH_TOKEN (Contents write on that repo only): a fine-grained
 # token grants the same access to every repo it covers, so each write is its own token. The maps go
 # to navitals-maps with NAVITALS_MAPS_TOKEN (Contents write on that repo only). Everything written here
@@ -43,9 +45,25 @@ permissions:
 
 jobs:
   mirror:
+    # One job per repo, one after another. The planet in one job takes about 6 h (17.7 s a tile:
+    # the 10 s pause between brouter.de downloads plus the gh calls, and 0.13 s a MB; measured on
+    # 1 and 12 Nov 2026), and brouter.de rebuilds every tile each month. Not in parallel: three at
+    # once would ask brouter.de about 18 times a minute, past the ~12–16 that get a 403, and would
+    # race each other's tiles.json. Estimated: europe 0.8 h, americas 2.1 h, world 3.1 h.
     if: ${{ github.event_name == 'schedule' || (inputs.mirror && !inputs.r2_only) }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 240
+    timeout-minutes: ${{ matrix.minutes }}
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - repo: europe
+            minutes: 120
+          - repo: americas
+            minutes: 200
+          - repo: world
+            minutes: 300
     steps:
       - uses: actions/checkout@v4
         with:
@@ -53,10 +71,10 @@ jobs:
           token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
           sparse-checkout: tools
           path: navitals
-      - name: Mirror BRouter tiles
+      - name: Mirror BRouter tiles (${{ matrix.repo }})
         env:
           GH_TOKEN: ${{ secrets.NAVITALS_BROUTER_TOKEN }}
-        run: python3 navitals/tools/brouter/mirror_tiles.py
+        run: python3 -u navitals/tools/brouter/mirror_tiles.py --repo ${{ matrix.repo }}
 
   tiles-r2:
     # After the mirror, or on its own (r2_only, or a run without the mirror). It reads tiles.json
