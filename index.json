@@ -9,8 +9,6 @@
         17.16,
         49.02
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T08:41:50.953577Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/at.search.sqlite.gz",
       "searchBytes": 79989486,
@@ -35,8 +33,6 @@
         10.51,
         49.79
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T08:39:09.537332Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-baden-wuerttemberg.search.sqlite.gz",
       "searchBytes": 81386161,
@@ -61,8 +57,6 @@
         13.85,
         50.57
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T08:46:56.665272Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-bayern.search.sqlite.gz",
       "searchBytes": 84789609,
@@ -87,8 +81,6 @@
         14.77,
         53.56
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T08:29:56.449206Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-brandenburg.search.sqlite.gz",
       "searchBytes": 33001494,
@@ -113,8 +105,6 @@
         10.25,
         51.66
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T08:44:19.771221Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-hessen.search.sqlite.gz",
       "searchBytes": 43137796,
@@ -139,8 +129,6 @@
         11.61,
         54.24
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:01:56.219549Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-niedersachsen.search.sqlite.gz",
       "searchBytes": 68324062,
@@ -165,8 +153,6 @@
         14.42,
         54.98
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T08:52:02.090664Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-mecklenburg-vorpommern.search.sqlite.gz",
       "searchBytes": 13249095,
@@ -191,8 +177,6 @@
         9.47,
         52.53
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:21:28.186774Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-nordrhein-westfalen.search.sqlite.gz",
       "searchBytes": 101947704,
@@ -217,8 +201,6 @@
         8.51,
         50.94
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:10:32.864680Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-rheinland-pfalz.search.sqlite.gz",
       "searchBytes": 32152388,
@@ -243,8 +225,6 @@
         7.41,
         49.64
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:06:23.054383Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-saarland.search.sqlite.gz",
       "searchBytes": 7130651,
@@ -269,8 +249,6 @@
         15.05,
         51.69
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:15:15.792210Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-sachsen.search.sqlite.gz",
       "searchBytes": 30235921,
@@ -295,8 +273,6 @@
         13.21,
         53.06
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:12:58.333315Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-sachsen-anhalt.search.sqlite.gz",
       "searchBytes": 17285475,
@@ -321,8 +297,6 @@
         11.8,
         55.15
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:20:06.864530Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-schleswig-holstein.search.sqlite.gz",
       "searchBytes": 26615448,
@@ -347,8 +321,6 @@
         10.5,
         47.81
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:40:02.833961Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/ch.search.sqlite.gz",
       "searchBytes": 67408504,
@@ -373,8 +345,6 @@
         12.66,
         51.65
       ],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-11-01T09:19:17.580488Z",
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-thueringen.search.sqlite.gz",
       "searchBytes": 16262399,

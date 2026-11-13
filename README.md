@@ -17,8 +17,6 @@ application source: only `index.json`, and the route overlay attached to its rel
       "id": "de-brandenburg",
       "name": "Berlin & Brandenburg",
       "bbox": [11.26, 51.36, 14.77, 53.56],
-      "sizeBytes": 0,
-      "hasElevation": false,
       "builtAt": "2026-12-01T08:39:09Z",
       "brouterBytes": 44800000,
       "searchURL": "https://github.com/markettner/navitals-search/releases/download/search/de-brandenburg.search.sqlite.gz",
@@ -40,8 +38,8 @@ its offline search index is on [navitals-search](https://github.com/markettner/n
 its basic map and route overlay cut on [navitals-maps](https://github.com/markettner/navitals-maps).
 
 Until November 2026 every region also carried Valhalla routing tiles, attached here to the `packs`
-release. The app no longer uses them, and they are gone. `sizeBytes` and `hasElevation` described
-them; they stay, empty, because app builds from before then cannot read an entry without them.
+release. The app no longer uses them, and they are gone, with the `sizeBytes` and `hasElevation`
+fields that described them.
 
 ## How it is built
 
