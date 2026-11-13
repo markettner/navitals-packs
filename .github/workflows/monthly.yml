@@ -1,5 +1,5 @@
 # Monthly refresh of the offline routing data, on the 1st:
-#   1. copy BRouter's tiles from brouter.de to navitals-brouter and its two sister repos (only the
+#   1. copy BRouter's tiles from brouter.de to navitals-brouter-europe and its two sister repos (only the
 #      ones rebuilt since; the planet, split by area, one job per repo),
 #   2. rebuild every region's manifest and search index from current OpenStreetMap extracts,
 #   3. replace the search indexes in place on navitals-search's `search` release,
@@ -12,7 +12,7 @@
 # `packs` release; the app no longer uses them.
 #
 # The build scripts live in the private app repo (tools/), checked out with NAVITALS_TOOLS_TOKEN
-# (fine-grained, Contents read on markettner/Navitals only). The mirror writes to navitals-brouter,
+# (fine-grained, Contents read on markettner/Navitals only). The mirror writes to navitals-brouter-europe,
 # navitals-brouter-americas and navitals-brouter-world with NAVITALS_BROUTER_TOKEN (Contents write on
 # those three only: they hold the same data, so one token), and the search indexes go to
 # navitals-search with NAVITALS_SEARCH_TOKEN (Contents write on that repo only): a fine-grained
@@ -36,7 +36,7 @@ on:
         type: boolean
         default: true
       r2_only:
-        description: "Only copy the tiles navitals-brouter has to R2, nothing else"
+        description: "Only copy the tiles the BRouter repos have to R2, nothing else"
         type: boolean
         default: false
 
@@ -78,8 +78,9 @@ jobs:
 
   tiles-r2:
     # After the mirror, or on its own (r2_only, or a run without the mirror). It reads tiles.json
-    # from navitals-brouter's release, so every way runs the same path; a current bucket uploads
-    # nothing.
+    # from navitals-brouter-europe's release, so every way runs the same path; a current bucket
+    # uploads nothing. Through gh with this repo's token (read access to public repos is enough):
+    # the release's public URL serves a copy about two minutes old right after the mirror.
     needs: mirror
     if: ${{ !cancelled() && needs.mirror.result != 'failure' }}
     runs-on: ubuntu-24.04
@@ -101,6 +102,7 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           python3 -m doctest navitals/tools/pipelines/r2.py
           python3 navitals/tools/brouter/mirror_r2.py

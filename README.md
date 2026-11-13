@@ -35,7 +35,7 @@ application source: only `index.json`, and the route overlay attached to its rel
 ```
 
 `bbox` is `[west, south, east, north]`. A region's route data is its cells of the BRouter tiles on
-[navitals-brouter](https://github.com/markettner/navitals-brouter), measured in `brouterBytes`;
+[navitals-brouter-europe](https://github.com/markettner/navitals-brouter-europe), measured in `brouterBytes`;
 its offline search index is on [navitals-search](https://github.com/markettner/navitals-search),
 its basic map and route overlay cut on [navitals-maps](https://github.com/markettner/navitals-maps).
 
