@@ -82,7 +82,7 @@ jobs:
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
       - name: Filter ${{ matrix.country.id }}
         run: |
-          curl -fsSL --retry 3 -o extract.osm.pbf "${{ matrix.country.url }}"
+          curl -fsSL --retry 5 --retry-connrefused --retry-delay 30 -o extract.osm.pbf "${{ matrix.country.url }}"
           navitals/tools/brouter/water/filter_water.sh extract.osm.pbf "${{ matrix.country.id }}-water.osm.pbf"
           rm extract.osm.pbf
           ls -la "${{ matrix.country.id }}-water.osm.pbf"
