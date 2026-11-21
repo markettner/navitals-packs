@@ -1,0 +1,187 @@
+# Monthly rebuild of the water tiles for Navitals' paddling profile (plan Phase 7s Stage 4), on the 3rd:
+# BRouter tiles of Europe's water ways, weirs, locks and mapped portages, about 2.5% of the bike
+# tiles' size. Built the way the route overlay is: each country filtered on its own runner (Europe
+# whole is more than a runner's disk), then one job merges them and runs BRouter's map creator once,
+# since a river crosses borders and tiles do not follow them.
+#
+# 1. check that brouter.de's lookups.dat has not grown where the paddle lookups append to it (the
+#    tiles are written with those lookups and must read through brouter.de's),
+# 2. filter every country's Geofabrik extract to its water (filter_water.sh),
+# 3. build Europe's tiles (build_water_tiles.sh),
+# 4. replace them in place on navitals-water's `tiles` release, with tiles.json (publish_water.py),
+# 5. copy them to the Cloudflare R2 bucket `navitals-packs` under water/ (mirror_r2.py --set water).
+# The 3rd keeps it off the 1st, when the monthly and quarterly runs take the runners.
+#
+# Scripts come from the private app repo with NAVITALS_TOOLS_TOKEN (see monthly.yml). The release
+# is written with NAVITALS_WATER_TOKEN (fine-grained, Contents write on markettner/navitals-water
+# only), and skipped while it is missing; the R2 copy with the R2 secrets (see overlays.yml), and
+# skipped while they are missing. A build is kept as the run's artifact for three days either way.
+name: Monthly water tiles
+
+on:
+  schedule:
+    - cron: "0 3 3 * *"
+  workflow_dispatch:
+    inputs:
+      countries:
+        description: "Geofabrik ids to build, space-separated, for a test (empty: Europe). Not published."
+        required: false
+        default: ""
+      r2_only:
+        description: "Only copy the tiles navitals-water has to R2, without rebuilding"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  countries:
+    if: ${{ !inputs.r2_only }}
+    runs-on: ubuntu-24.04
+    outputs:
+      list: ${{ steps.list.outputs.list }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: |
+            tools
+            Navitals/Resources/BRouter
+          path: navitals
+      - name: Check brouter.de's lookups
+        run: python3 navitals/tools/brouter/check_lookups.py
+      - id: list
+        env:
+          WANTED: ${{ inputs.countries }}
+        run: |
+          list=$(python3 navitals/tools/overlays/europe_countries.py)
+          if [ -n "$WANTED" ]; then
+            list=$(echo "$list" | jq -c --arg w "$WANTED" '($w | split(" ")) as $ids | map(select(.id as $i | $ids | index($i)))')
+          fi
+          echo "$list" | jq -r '.[].id' | tr '\n' ' '; echo
+          echo "list=$list" >> "$GITHUB_OUTPUT"
+
+  filter:
+    needs: countries
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        country: ${{ fromJSON(needs.countries.outputs.list) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - name: Filter ${{ matrix.country.id }}
+        run: |
+          curl -fsSL --retry 3 -o extract.osm.pbf "${{ matrix.country.url }}"
+          navitals/tools/brouter/water/filter_water.sh extract.osm.pbf "${{ matrix.country.id }}-water.osm.pbf"
+          rm extract.osm.pbf
+          ls -la "${{ matrix.country.id }}-water.osm.pbf"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: water-${{ matrix.country.id }}
+          path: ${{ matrix.country.id }}-water.osm.pbf
+          retention-days: 3
+
+  build:
+    # Only when every country filtered: a missing one would take its water out of the tiles.
+    needs: filter
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: Make room
+        # Europe's filtered water, merged, as OPL for the hazard pass and in the map creator's
+        # stages; the runner's preinstalled toolchains are not used.
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: |
+            tools
+            Navitals/Resources/BRouter
+          path: navitals
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: water-*
+          path: water
+          merge-multiple: true
+      - name: Build the tiles
+        env:
+          WATER_JAVA_HEAP: 10g
+        run: |
+          navitals/tools/brouter/water/build_water_tiles.sh tiles water/*-water.osm.pbf
+          tail -3 navitals/tools/brouter/.work/water/run/linker.log
+          du -sh tiles
+      - uses: actions/upload-artifact@v4
+        with:
+          name: water-tiles
+          path: tiles/
+          retention-days: 3
+
+  publish:
+    # Not for a test build of a few countries: that would replace Europe's tiles with theirs.
+    needs: build
+    if: ${{ inputs.countries == '' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-24.04
+    concurrency: navitals-water
+    env:
+      # A step's `if` cannot see secrets, nor its own env; this flag it can.
+      HAS_WATER_TOKEN: ${{ secrets.NAVITALS_WATER_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - uses: actions/download-artifact@v4
+        with:
+          name: water-tiles
+          path: tiles
+      - name: Publish the tiles
+        if: env.HAS_WATER_TOKEN == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.NAVITALS_WATER_TOKEN }}
+        run: python3 navitals/tools/brouter/water/publish_water.py tiles
+
+  r2:
+    # After a publish, or on its own (r2_only). It reads tiles.json from navitals-water's release,
+    # so both ways run the same path, and a current bucket uploads nothing.
+    needs: publish
+    if: ${{ !cancelled() && (needs.publish.result == 'success' || inputs.r2_only) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    concurrency: navitals-r2
+    env:
+      HAS_R2: ${{ secrets.R2_ACCESS_KEY_ID != '' && secrets.R2_SECRET_ACCESS_KEY != '' && secrets.R2_ENDPOINT != '' }}
+      HAS_WATER_TOKEN: ${{ secrets.NAVITALS_WATER_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: markettner/Navitals
+          token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
+          sparse-checkout: tools
+          path: navitals
+      - name: Copy the water tiles to R2
+        if: env.HAS_R2 == 'true' && env.HAS_WATER_TOKEN == 'true'
+        env:
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 navitals/tools/brouter/mirror_r2.py --set water

@@ -8,6 +8,9 @@
 #      web planner's on-device engine streams them (GitHub serves release assets without CORS),
 #   6. build every region's basic offline map and overlay cut (plan Phase 7m), replace them in place
 #      on navitals-maps' `maps` release, and list them in index.json.
+# The mirror first checks brouter.de's lookups.dat against the paddle lookups (check_lookups.py)
+# and mirrors nothing if it has grown where they append to it. The water tiles have their own
+# workflow, water.yml.
 # Until November 2026 step 2 also built each region's Valhalla tiles, uploaded in step 4 to the
 # `packs` release; the app no longer uses them.
 #
@@ -69,8 +72,15 @@ jobs:
         with:
           repository: markettner/Navitals
           token: ${{ secrets.NAVITALS_TOOLS_TOKEN }}
-          sparse-checkout: tools
+          sparse-checkout: |
+            tools
+            Navitals/Resources/BRouter
           path: navitals
+      - name: Check brouter.de's lookups
+        # The paddle lookups append to brouter.de's: if its lookups.dat grew where they do, its
+        # tiles would read wrong through them (tools/brouter/check_lookups.py). Then nothing is
+        # mirrored until the app's lookups are brought up to date.
+        run: python3 navitals/tools/brouter/check_lookups.py
       - name: Mirror BRouter tiles (${{ matrix.repo }})
         env:
           GH_TOKEN: ${{ secrets.NAVITALS_BROUTER_TOKEN }}

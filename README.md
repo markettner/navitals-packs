@@ -50,6 +50,10 @@ Rebuilt by the workflows in `.github/workflows`, from scripts in the (private) a
   `index.json` rewritten. The app offers an update when a part's checksum changes.
 - **Quarterly** (`overlays.yml`): the cycle and hiking route overlay for Europe, as a new release
   `overlays-<date>`. `index.json`'s `overlay` entry names the current one.
+- **Monthly, on the 3rd** (`water.yml`): water tiles for the paddling profile, BRouter tiles of
+  Europe's water ways, weirs, locks and mapped portages, replaced in place on the `tiles` release
+  of [navitals-water](https://github.com/markettner/navitals-water), which lists them in
+  `tiles.json`.
 
 The releases here are kept under 5 GB in total, so there are only ever two generations of the
 overlay.
