@@ -38,7 +38,9 @@ permissions:
 jobs:
   countries:
     if: ${{ !inputs.r2_only }}
-    runs-on: ubuntu-24.04
+    # The jobs that talk to Geofabrik run on arm: since about 20 Nov 2026 Geofabrik refuses many
+    # of GitHub's x86 runners (three runs in four on 21 Nov), retries or not.
+    runs-on: ubuntu-24.04-arm
     outputs:
       list: ${{ steps.list.outputs.list }}
     steps:
@@ -65,7 +67,7 @@ jobs:
 
   filter:
     needs: countries
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 90
     strategy:
       fail-fast: false
