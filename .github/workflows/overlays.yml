@@ -29,7 +29,8 @@ permissions:
 jobs:
   countries:
     if: ${{ !inputs.mirror_only }}
-    runs-on: ubuntu-24.04
+    # On arm: since about 20 Nov 2026 Geofabrik refuses many of GitHub's x86 runners (see water.yml).
+    runs-on: ubuntu-24.04-arm
     outputs:
       list: ${{ steps.list.outputs.list }}
     steps:
@@ -44,7 +45,7 @@ jobs:
 
   filter:
     needs: countries
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 90
     strategy:
       fail-fast: false
